@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- model数据模型 -->
-        <el-form :model="ruleForm" :rules="rules" ref="loginForm">
+        <!-- <el-form :model="ruleForm" :rules="rules" ref="loginForm"> -->
             <!-- prop用于校验 -->
-            <el-form-item label="用户名" prop="name">
+            <!-- <el-form-item label="用户名" prop="name">
                 <el-input v-model="ruleForm.name"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="pwd">
@@ -12,14 +12,14 @@
             <el-form-item>
                 <el-button type="primary" @click="submitForm()">登录</el-button>
             </el-form-item>
-        </el-form>
+        </el-form> -->
 
         <!-- 自定义表单插件 -->
         <m-form :model="ruleForm" :rules="rules" ref="loginForm2">
-            <m-form-item label="用户名" props="name">
+            <m-form-item label="用户名" prop="name">
                 <m-input v-model="ruleForm.name" type="text"></m-input>
             </m-form-item>
-            <m-form-item label="密码" props="pwd">
+            <m-form-item label="密码" prop="pwd">
                 <m-input v-model="ruleForm.pwd" type="password"></m-input>
             </m-form-item>
             <m-form-item>
@@ -66,7 +66,16 @@ export default {
                 }
             });
         },
-        submitForm2() {}
+        submitForm2() {
+            this.$refs.loginForm2.validate(valid => {
+                if (valid) {
+                    alert("提交登录！");
+                } else {
+                    console.log("校验失败");
+                    return false;
+                }
+            });
+        }
     }
 };
 </script>
