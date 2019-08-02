@@ -10,6 +10,7 @@
     import schema from 'async-validator';
 
     export default {
+        name: 'MFormItem',
         inject: ['form'],
         props: ['label', 'prop'],
         data() {

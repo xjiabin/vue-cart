@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: 'MForm',
         provide() {
             return {
                 form: this

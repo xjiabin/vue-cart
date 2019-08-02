@@ -3,7 +3,11 @@
 </template>
 
 <script>
+    import emitter from '../common/emitter';
+
     export default {
+        name: 'MInput',
+        mixins: [emitter],
         inject: ['form'],
         props: {
             value: {
@@ -36,7 +40,9 @@
                 // 不能通过子组件 -> 父组件之间的传值方式，因为在 formItem 组件中，子组件是一个 slot 插槽，
                 // 不能在 slot 中接收到子组件 $emit 过来的事件
                 // 解决方法：可以用父组件(formItem)自己派发($emit)事件，然后再自己监听($on)事件
-                this.$parent.$emit('validate', this.inputValue); // 把最新的值传递给 formItem 进行校验
+                // this.$parent.$emit('validate', this.inputValue); // 把最新的值传递给 formItem 进行校验
+
+                this.dispatch('MFormItem', 'validate', this.inputValue); // 使用自定义dispatch向指定组件派发事件
             }
         },
     }
